@@ -17,7 +17,7 @@ project-root/
 │   ├── src/
 │   │   ├── pages/       # LoginPage, ExpensePage
 │   │   └── App.js
-├── server/              # Express backend
+├── server/              # backend
 │   ├── index.js         # Server   
 │ 
 └── db.js                # MySQL connection
