@@ -11,6 +11,17 @@ Features:
 3. Edit or Delete Expenses
 4. Pie Chart to visualize spending by category
 
+File Structure:
+project-root/
+├── client/              # React frontend
+│   ├── src/
+│   │   ├── pages/       # LoginPage, ExpensePage
+│   │   └── App.js
+├── server/              # Express backend
+│   ├── index.js         # Server   
+│ 
+└── db.js                # MySQL connection
+└── README.md
 
 Edit db.js:
 
