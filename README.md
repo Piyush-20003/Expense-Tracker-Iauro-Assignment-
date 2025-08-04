@@ -12,16 +12,16 @@ Features:
 4. Pie Chart to visualize spending by category
 
 File Structure:
-project-root/
-├── client/              # React frontend
-│   ├── src/
-│   │   ├── pages/       # LoginPage, ExpensePage
-│   │   └── App.js
-├── server/              # backend
-│   ├── index.js         # Server   
-│ 
-└── db.js                # MySQL connection
-└── README.md
+    project-root/
+    ├── client/              # React frontend
+    │   ├── src/
+    │   │   ├── pages/       # LoginPage, ExpensePage
+    │   │   └── App.js
+    ├── server/              # backend
+    │   ├── index.js         # Server   
+    │ 
+    └── db.js                # MySQL connection
+    └── README.md
 
 Edit db.js:
 
