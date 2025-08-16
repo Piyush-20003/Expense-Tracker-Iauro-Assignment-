@@ -116,6 +116,7 @@ app.post('/show_expense',(req,res)=>{
             return res.status(500).send("Internal Server error")
         }
         if (results.length > 0){
+                //console.log("This is Results: "+JSON.stringify(results))
                return res.status(200).json({ my_response: results }); 
             
         }else{
@@ -123,31 +124,17 @@ app.post('/show_expense',(req,res)=>{
         }
     })
 })
-app.post('/delete_expense',(req,res)=>{
-    const expense_id = req.body.expense_id;
+app.post('/delete_selected_expenses',(req,res)=>{
     const user_id = req.body.user_id;
-    db.query('SELECT user_id FROM EXPENSE WHERE user_id = ? and expense_id = ?',[user_id,expense_id],(err,results)=>{
-        if (err){
-            console.log("Error in step1 delete expense")
-            res.status(500).send("Internal Server Error") 
-        }
-        if (results.length>0){
-             db.query('DELETE FROM EXPENSE WHERE expense_id = ?',[expense_id],(err,result)=>{
+    const checkbox_arr = req.body.checkbox_arr;
 
-                if(err){
-                    console.log("Error in updating expense: ",err)
-                    res.send("Internal server error")
-                    return 
-                }
-                res.send("Deleted Expense with Expense Id: "+expense_id)
-            } )
-        }else{
-            console.log("Invalid Expense Id")
-            res.status(403).send("Valid Expense Id required" );
+    if (checkbox_arr.length === 0){
+        return res.status(400).send({message:'Please select Expenses to delete'})
+    }
+    const placeholders =  checkbox_arr.map(()=>{return '?'}).join(',');
 
-        }
-    })
-   
+    db.query(`DELETE FROM EXPENSE WHERE user_id = ? AND expense_id IN (${placeholders})`,[user_id,...checkbox_arr])
+    res.send({message:"Selected item Deleted"})
 })
 app.post('/update_expense',(req,res)=>{
     const expense_id = req.body.expense_id;
@@ -166,12 +153,12 @@ app.post('/update_expense',(req,res)=>{
             db.query("UPDATE EXPENSE SET Category = ?, Amount = ?, Comments = ? WHERE expense_id = ?",[category,amount,comment,expense_id],(err,result)=>{
                 if (err){
                     console.log(err)
-                    return res.status(500).send("Internal Server Error")
+                    return res.status(500).send({msg:"Internal Server Error"})
                 }
-                res.status(200).send("Expenses updated")
+                res.status(200).send({success:true,msg:"Expenses updated"})
             })
         }else{
-           return res.status(403).send("Valid Expense Id required");
+           return res.status(403).send({msg:"Valid Expense Id required"});
         }
     })
 
@@ -191,15 +178,6 @@ app.post('/delete_specific',async (req,res)=>{
     })
 })
 
-
-app.post('/alive',(req,res)=>{
-    //console.log("Server is alive.")
-    res.send("Server is alive") 
-})
-
-app.post('/hello',(req,res)=>{
-    res.send("Hi this is server side")
-})
 const port = 5000
 
 app.listen(port,() => {
