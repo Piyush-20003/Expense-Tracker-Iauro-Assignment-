@@ -59,15 +59,21 @@ Operating Instructions:
         Click "Add Expense" to store the data.
 
     3. Delete Expense:
-        Enter the Expense ID (visible in the expense table).
+        Use the checkboxes in the table to select multiple expenses.
 
-        Click "Delete Expense" to remove it from the database.
+        Click the 🗑️ delete icon button at the top of the table.
+        
+        All selected expenses will be deleted at once.
 
     4. Update Expense
-        Enter the existing Expense ID.
+       Click the Update button next to the expense you want to edit.
 
-        Fill in the new amount, category, or comment.
-
-        Click "Update Expense" to update the record.
+        A popup dialog will appear with the current details pre-filled.
+        
+        Modify the Category, Amount, or Comment.
+        
+        Click Save Changes.
+        
+        The table and chart will refresh to reflect the updated expense.
 
     Note: All actions are user-specific; you will only see and modify your own expenses.
